@@ -1,1 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Go Out! - Quick App Tour</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B5CF6;
+            --primary-hover: #7C3AED;
+            --accent: #EC4899;
+            --highlight: #F59E0B;
+            --bg-dark: #0B0F19;
+            --bg-card: #111827;
+            --border: #1F2937;
+            --text-main: #F9FAFB;
+            --text-sub: #9CA3AF;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        header {
+            padding: 150px 8% 60px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background: rgba(236, 72, 153, 0.12);
+            color: var(--accent);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2.3rem, 5vw, 3.6rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-sub);
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            padding: 14px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            max-width: 360px;
+            margin: 50px auto 0;
+            background: #030712;
+            border: 4px solid #1F2937;
+            border-radius: 40px;
+            padding: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7), 0 0 30px rgba(139, 92, 246, 0.2);
+            text-align: left;
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 18px;
+            background: #1F2937;
+            margin: 0 auto 15px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .app-screen-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .badge-tag {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin: 3px;
+        }
+
+        /* Tour Steps */
+        .tour-section {
+            padding: 80px 8%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+        }
+
+        .step-row {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+
+        .step-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-info { flex: 1; min-width: 300px; }
+        .step-visual { flex: 1; min-width: 300px; }
+
+        .step-num {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .step-info h3 {
+            font-size: 1.7rem;
+            margin-bottom: 12px;
+        }
+
+        .step-info p {
+            color: var(--text-sub);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .visual-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Feature Cards */
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            padding: 0 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
+        /* Tech Badges */
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .tech-badge {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-sub);
+            margin-top: 100px;
+            font-size: 0.9rem;
+        }
+
+        footer strong { color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <span class="logo-icon">🎉</span> Let's Go Out!
+        </div>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#tour">App Tour</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#tech">Tech Stack</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="overview">
+        <span class="badge">🚀 Official Interactive App Tour</span>
+        <h1>Plan Perfect Outings with <span>Let's Go Out!</span></h1>
+        <p class="hero-desc">The ultimate hangout planner that helps you and your friends discover top local spots, vote on places to go, and coordinate seamless outings without the group chat chaos.</p>
+        <a href="#tour" class="cta-btn">Start Guided Tour 👇</a>
+
+        <!-- Interactive Phone Mockup Preview -->
+        <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div style="text-align: center; font-weight:700; font-size:0.9rem; margin-bottom:12px; color:var(--text-sub);">
+                📱 Weekend Plan #04
+            </div>
+
+            <div class="app-screen-card">
+                <div style="font-size:0.8rem; color:var(--text-sub);">Group Poll Active:</div>
+                <div style="margin-top:6px;">
+                    <span class="badge-tag">🍕 Rooftop Pizza (3 votes)</span>
+                    <span class="badge-tag">🎳 Bowling Alley (4 votes)</span>
+                    <span class="badge-tag">☕ Sunset Cafe (1 vote)</span>
+                </div>
+            </div>
+
+            <div class="app-screen-card" style="border-left: 3px solid var(--accent);">
+                <div style="font-size:0.75rem; color:var(--accent); font-weight:700;">WINNING DESTINATION 🎉</div>
+                <div style="font-weight:700; font-size:1rem; margin:2px 0;">Metro Strike & Bowling</div>
+                <div style="font-size:0.8rem; color:var(--text-sub);">📍 Downtown • ⏰ Saturday 7:00 PM • 👥 6 Attending</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Guided Tour Steps Section -->
+    <section class="tour-section" id="tour">
+        <h2 class="section-title">📱 Guided App Walkthrough</h2>
+
+        <!-- Step 1 -->
+        <div class="step-row">
+            <div class="step-info">
+                <span class="step-num">STEP 01</span>
+                <h3>Discover Top Spots Nearby</h3>
+                <p>Browse curated lists of restaurants, outdoor activities, cafes, nightlife, and hidden gems based on your live location, budget, and group vibe.</p>
+            </div>
+            <div class="step-visual">
+                <div class="visual-box">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🔍</div>
+                    <h4 style="margin-bottom:8px;">Smart Spot Discovery</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-sub);">Filter spots by atmosphere, distance, price range, and group size availability.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-row">
+            <div class="step-info">
+                <span class="step-num">STEP 02</span>
+                <h3>Group Voting & Polls</h3>
+                <p>No more endless back-and-forth messaging. Create quick plan polls where your squad can upvote their favorite places and settle on a time in seconds.</p>
+            </div>
+            <div class="step-visual">
+                <div class="visual-box">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📊</div>
+                    <h4 style="margin-bottom:8px;">Instant Decision Making</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-sub);">Fair voting system to quickly agree on where to meet up.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-row">
+            <div class="step-info">
+                <span class="step-num">STEP 03</span>
+                <h3>Shared Itinerary & Map</h3>
+                <p>Keep everyone on the same page with a unified timeline, integrated map routes, and automated reminders so nobody gets left behind.</p>
+            </div>
+            <div class="step-visual">
+                <div class="visual-box">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🗺️</div>
+                    <h4 style="margin-bottom:8px;">Live Route & Timeline</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-sub);">Step-by-step route directions and RSVP tracking for every attendee.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section id="features" style="padding-bottom: 80px;">
+        <h2 class="section-title">✨ Key Features</h2>
+        <div class="grid-features">
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Location Explorer</h3>
+                <p>Find trending venues and activities nearby instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗳️</div>
+                <h3>Squad Polls</h3>
+                <p>Eliminate group chat arguments with fast, fair voting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Itinerary Builder</h3>
+                <p>Schedule multi-stop hangouts with live directions and times.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" style="text-align: center; padding: 60px 8%;">
+        <h2 class="section-title" style="margin-bottom: 15px;">🛠️ Tech Stack</h2>
+        <p style="color: var(--text-sub);">Built for smooth mobile and web responsiveness</p>
+        <div class="tech-badges">
+            <span class="tech-badge">HTML5 / CSS3</span>
+            <span class="tech-badge">JavaScript (ES6+)</span>
+            <span class="tech-badge">Maps API</span>
+            <span class="tech-badge">GitHub Pages</span>
+            <span class="tech-badge">Responsive Design</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Let's Go Out! - App Tour Project</strong></p>
+        <p style="margin-top: 6px;">Hosted on GitHub Pages • Submitted for Class Assignment</p>
+    </footer>
+
+</body>
+</html>
